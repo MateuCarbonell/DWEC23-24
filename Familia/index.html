@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tareas Familiares</title>
+</head>
+<body>
+  <script>
+    function Familia(miembros, tareas) {
+      this.miembros = miembros;
+      this.tareas = tareas;
+
+      this.planificarTareas = function(semanas) {
+        var totalMiembros = this.miembros.length; 
+        var totalTareas = this.tareas.length;  // declaro estas dos variables para que sea mas facil manejarse en los bucles.
+
+        for (var semana = 0; semana < semanas; semana++) {
+          console.log("Semana " + (semana + 1) + " --> "); 
+          for (var i = 0; i < totalMiembros; i++) {
+            if (i < totalTareas) { 
+              var tareaIndex = (semana * totalMiembros + i) % totalTareas; //módulo para rotar las tareas, como en la tarea anterior.
+              var miembro = this.miembros[i];   // Obtiene el nombre gracias al indice 
+              var tarea = this.tareas[tareaIndex]; // Obtiene la tarea asignada
+              console.log(miembro + " --> " + tarea); // asignación de tarea para el miembro
+            } else {  // condicional por is no hay tareea
+              var miembro = this.miembros[i]; // sacamos el nombre de el nombre gracias al indice
+              console.log(miembro + " --> Descanso"); // imprimimos descanso
+            }
+          }
+          console.log("------");
+        }
+      }
+    }
+
+    var fSastre = new Familia(["Padre", "Madre", "Hijo", "Hija"], ["Poner lavadora", "Limpiar cocina", "Limpiar baño"]);
+    var fTorrens = new Familia(["Padre", "Madre", "Hijo", "Hija"], ["Planchar", "Limpiar baño"]);
+    var fMoll = new Familia(["Padre", "Madre", "Hijo", "Hija grande", "Hija pequeña"], ["Poner lavadora", "Limpiar cocina", "Limpiar comedor", "Planchar", "Limpiar baño"]);
+
+    fSastre.planificarTareas(52); 
+    fTorrens.planificarTareas(4);  
+    fMoll.planificarTareas(12);   
+  </script>
+</body>
+</html>
